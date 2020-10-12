@@ -11,10 +11,10 @@ import lombok.experimental.SuperBuilder;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@SuperBuilder(toBuilder = true)
 @ToString(callSuper = true)
-@JsonIgnoreProperties(ignoreUnknown = true)
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AddToBucketDTO extends EventDTO {
     private long contentId;
 

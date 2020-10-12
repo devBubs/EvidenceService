@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 public class DefaultEmitterDao implements EmitterDao{
 
     @Override
-    public EventBO emitEventBO(EventBO eventBO) {
-        log.info("Emitting event to processor: " + eventBO.toString());
+    public EventBO<?, ?> emitEventBO(EventBO<?, ?> eventBO) {
+        log.info("Emitting event to processor: {}", eventBO);
         return eventBO;
     }
 }

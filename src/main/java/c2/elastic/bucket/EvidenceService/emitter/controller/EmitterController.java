@@ -8,6 +8,7 @@ import c2.elastic.bucket.EvidenceService.factory.EventBOFactory;
 import c2.elastic.bucket.EvidenceService.model.baseEvent.EventBO;
 import c2.elastic.bucket.EvidenceService.model.baseEvent.EventDTO;
 import c2.elastic.bucket.GenBucket.model.GenericResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,7 @@ public class EmitterController {
     @PostMapping("/event")
     ResponseEntity<GenericResponse<EventDTO>> emitEvent(@RequestBody EventDTO eventDTO){
         try{
+            log.info("Received event type: " + eventDTO.getEventType());
             emitterValidator.validateEmitEvent(eventDTO);
             EventBO<?,?> eventBO = EventBOFactory.createBO(eventDTO);
             eventBO = emitterManager.processEvent(eventBO);

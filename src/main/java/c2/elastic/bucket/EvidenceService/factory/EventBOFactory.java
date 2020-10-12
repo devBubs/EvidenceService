@@ -22,76 +22,80 @@ import static c2.elastic.bucket.EvidenceService.constants.EventConstants.GENRE_V
 import static c2.elastic.bucket.EvidenceService.constants.EventConstants.RATE_MOVIE_EVENT;
 
 public class EventBOFactory {
-    public static EventBO createBO(EventDTO eventDTO){
+    public static EventBO<?, ?> createBO(EventDTO eventDTO) {
         String incomingEvent = eventDTO.getEventType();
-        EventBO eventBO = null;
-        switch (incomingEvent){
-            case DETAILS_EVENT: eventBO = createDetailsBO((DetailsDTO) eventDTO); break;
-            case ADD_TO_BUCKET_EVENT: eventBO = createAddToBucketBO((AddToBucketDTO)eventDTO);
-            case GENRE_VIEW_EVENT: eventBO = createGenreViewBO((GenreViewDTO)eventDTO);
-            case RATE_MOVIE_EVENT: eventBO = createRateMovieBO((RateMovieDTO)eventDTO);
+        EventBO<?, ?> eventBO = null;
+        switch (incomingEvent) {
+            case DETAILS_EVENT:
+                eventBO = createDetailsBO((DetailsDTO) eventDTO);
+                break;
+            case ADD_TO_BUCKET_EVENT:
+                eventBO = createAddToBucketBO((AddToBucketDTO) eventDTO);
+                break;
+            case GENRE_VIEW_EVENT:
+                eventBO = createGenreViewBO((GenreViewDTO) eventDTO);
+                break;
+            case RATE_MOVIE_EVENT:
+                eventBO = createRateMovieBO((RateMovieDTO) eventDTO);
+                break;
         }
         return eventBO;
     }
 
-    public static EventBO createBO(EventDO eventDO){
+    public static EventBO<?, ?> createBO(EventDO eventDO) {
         return null;
     }
 
-    private static DetailsBO createDetailsBO(DetailsDTO detailsDTO){
-        DetailsBO detailsBO = DetailsBO.builder()
+    private static DetailsBO createDetailsBO(DetailsDTO detailsDTO) {
+        return DetailsBO.builder()
                 .userId(detailsDTO.getUserId())
                 .timestamp(detailsDTO.getTimestamp())
                 .eventType(detailsDTO.getEventType())
                 .contentId(detailsDTO.getContentId())
                 .build();
-        return detailsBO;
     }
 
-    private static DetailsBO createDetailsBO(DetailsDO detailsDO){
+    private static DetailsBO createDetailsBO(DetailsDO detailsDO) {
         return null;
     }
 
-    private static AddToBucketBO createAddToBucketBO(AddToBucketDTO addToBucketDTO){
-        AddToBucketBO addToBucketBO = AddToBucketBO.builder()
+    private static AddToBucketBO createAddToBucketBO(AddToBucketDTO addToBucketDTO) {
+        return AddToBucketBO.builder()
                 .userId(addToBucketDTO.getUserId())
                 .timestamp(addToBucketDTO.getTimestamp())
                 .eventType(addToBucketDTO.getEventType())
                 .contentId(addToBucketDTO.getContentId())
                 .build();
-        return addToBucketBO;
     }
 
-    private static AddToBucketBO createAddToBucketBO(AddToBucketDO addToBucketDO){
+    private static AddToBucketBO createAddToBucketBO(AddToBucketDO addToBucketDO) {
         return null;
     }
 
-    private static GenreViewBO createGenreViewBO(GenreViewDTO genreViewDTO){
-        GenreViewBO genreViewBO = GenreViewBO.builder()
+    private static GenreViewBO createGenreViewBO(GenreViewDTO genreViewDTO) {
+        return GenreViewBO.builder()
                 .userId(genreViewDTO.getUserId())
                 .timestamp(genreViewDTO.getTimestamp())
                 .eventType(genreViewDTO.getEventType())
                 .contentId(genreViewDTO.getContentId())
                 .build();
-        return genreViewBO;
     }
 
-    private static GenreViewBO createGenreViewBO(GenreViewDO genreViewDO){
+    private static GenreViewBO createGenreViewBO(GenreViewDO genreViewDO) {
         return null;
     }
 
-    private static RateMovieBO createRateMovieBO(RateMovieDTO rateMovieDTO){
-        RateMovieBO rateMovieBO = RateMovieBO.builder()
+    private static RateMovieBO createRateMovieBO(RateMovieDTO rateMovieDTO) {
+        return RateMovieBO.builder()
                 .userId(rateMovieDTO.getUserId())
                 .timestamp(rateMovieDTO.getTimestamp())
                 .eventType(rateMovieDTO.getEventType())
                 .contentId(rateMovieDTO.getContentId())
                 .rating(rateMovieDTO.getRating())
                 .build();
-        return rateMovieBO;
     }
 
-    private static RateMovieBO createRateMovieBO(RateMovieDO rateMovieDO){
+    private static RateMovieBO createRateMovieBO(RateMovieDO rateMovieDO) {
         return null;
     }
 }

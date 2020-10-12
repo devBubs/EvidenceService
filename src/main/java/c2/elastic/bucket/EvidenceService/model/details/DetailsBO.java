@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true )
 @SuperBuilder(toBuilder = true )
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class DetailsBO extends EventBO<DetailsDTO, DetailsDO> {
 
@@ -23,21 +25,19 @@ public class DetailsBO extends EventBO<DetailsDTO, DetailsDO> {
 
     @Override
     public DetailsDO convertToDO() {
-        DetailsDO detailsDO = DetailsDO.builder().userId(getUserId())
+        return DetailsDO.builder().userId(getUserId())
                 .timestamp(getTimestamp())
                 .eventType(getEventType())
                 .contentId(contentId)
                 .build();
-        return detailsDO;
     }
 
     @Override
     public DetailsDTO convertToDTO() {
-        DetailsDTO detailsDTO = DetailsDTO.builder().userId(getUserId())
+        return DetailsDTO.builder().userId(getUserId())
                 .timestamp(getTimestamp())
                 .eventType(getEventType())
                 .contentId(contentId)
                 .build();
-        return detailsDTO;
     }
 }

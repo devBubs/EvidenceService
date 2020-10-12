@@ -5,4 +5,6 @@ public class EventConstants {
     public static final String GENRE_VIEW_EVENT = "genreView";
     public static final String ADD_TO_BUCKET_EVENT = "addToBucket";
     public static final String RATE_MOVIE_EVENT = "rateMovie";
+
+    public static final String EVENT_TYPE_ATTRIBUTE = "eventType";
 }

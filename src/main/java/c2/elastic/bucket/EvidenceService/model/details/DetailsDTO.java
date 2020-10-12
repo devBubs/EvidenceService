@@ -1,8 +1,8 @@
 package c2.elastic.bucket.EvidenceService.model.details;
 
-import c2.elastic.bucket.EvidenceService.constants.EventConstants;
 import c2.elastic.bucket.EvidenceService.model.baseEvent.EventDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -21,10 +21,5 @@ public class DetailsDTO extends EventDTO {
     public DetailsDTO(long userId, String timestamp, String eventType, long contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
-    }
-
-    @Override
-    public String getEventType() {
-        return EventConstants.DETAILS_EVENT;
     }
 }
