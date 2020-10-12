@@ -36,7 +36,7 @@ public class EmitterController {
     ResponseEntity<GenericResponse<EventDTO>> emitEvent(@RequestBody EventDTO eventDTO){
         try{
             emitterValidator.validateEmitEvent(eventDTO);
-            EventBO eventBO = EventBOFactory.createBO(eventDTO);
+            EventBO<?,?> eventBO = EventBOFactory.createBO(eventDTO);
             eventBO = emitterManager.processEvent(eventBO);
             eventDTO = eventBO.convertToDTO();
             GenericResponse<EventDTO> response = GenericResponse.<EventDTO>builder()
