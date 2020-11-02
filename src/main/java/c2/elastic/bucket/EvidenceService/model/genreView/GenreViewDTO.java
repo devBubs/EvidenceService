@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class GenreViewDTO extends EventDTO {
     private long contentId;
 
-    public GenreViewDTO(long userId, String timestamp, String eventType, long contentId) {
+    public GenreViewDTO(String userId, String timestamp, String eventType, long contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
     }

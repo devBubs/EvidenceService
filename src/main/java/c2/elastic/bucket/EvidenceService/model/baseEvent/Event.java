@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Event {
-    private long userId;
+    private String userId;
     private String timestamp;
     private String eventType;
 }

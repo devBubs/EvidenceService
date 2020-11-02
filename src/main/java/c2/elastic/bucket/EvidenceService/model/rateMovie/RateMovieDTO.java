@@ -18,7 +18,7 @@ public class RateMovieDTO extends EventDTO {
     private long contentId;
     private float rating;
 
-    public RateMovieDTO(long userId, String timestamp, String eventType, long contentId, float rating) {
+    public RateMovieDTO(String userId, String timestamp, String eventType, long contentId, float rating) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
         this.rating = rating;

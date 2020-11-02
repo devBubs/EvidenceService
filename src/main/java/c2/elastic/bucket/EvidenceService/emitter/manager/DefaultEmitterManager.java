@@ -1,25 +1,36 @@
 package c2.elastic.bucket.EvidenceService.emitter.manager;
 
-import c2.elastic.bucket.EvidenceService.emitter.dao.EmitterDao;
-import c2.elastic.bucket.EvidenceService.model.baseEvent.EventBO;
-import c2.elastic.bucket.EvidenceService.model.baseEvent.EventDO;
-import org.springframework.beans.factory.annotation.Autowired;
+import c2.elastic.bucket.EvidenceService.exception.EvidenceServiceNonRetriableException;
+import c2.elastic.bucket.EvidenceService.model.baseEvent.EventDTO;
+import c2.elastic.bucket.GenBucket.msgqueue.Producer;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 @Component
-public class DefaultEmitterManager implements c2.elastic.bucket.EvidenceService.emitter.manager.EmitterManager {
+public class DefaultEmitterManager implements EmitterManager {
 
-    private final EmitterDao emitterDao;
+    @Resource(name = "AllProducersMap")
+    private Map<String, Producer<String, EventDTO>> producers;
 
-    @Autowired
-    public DefaultEmitterManager(EmitterDao emitterDao) {
-        this.emitterDao = emitterDao;
+    @Override
+    public void processEvent(EventDTO eventDTO) {
+        String eventType = eventDTO.getEventType();
+        Producer<String, EventDTO> producer = Optional.ofNullable(producers.get(eventType))
+                .orElseThrow(() -> new EvidenceServiceNonRetriableException("Not producer found for eventType:" + eventType));
+        producer.produce(eventDTO);
     }
 
     @Override
-    public EventBO processEvent(EventBO eventBO) {
-        //TODO: add processing calls to enricher component
-        eventBO = emitterDao.emitEventBO(eventBO);
-        return eventBO;
+    public void processEvent(List<EventDTO> eventDTOList) {
+        String eventType = eventDTOList.stream().findFirst()
+                .orElseThrow(() -> new EvidenceServiceNonRetriableException("No valid events found"))
+                .getEventType();
+        Producer<String, EventDTO> producer = Optional.ofNullable(producers.get(eventType))
+                .orElseThrow(() -> new EvidenceServiceNonRetriableException("Not producer found for eventType:" + eventType));
+        producer.produce(eventDTOList);
     }
 }

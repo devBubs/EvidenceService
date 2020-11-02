@@ -16,6 +16,9 @@ import c2.elastic.bucket.EvidenceService.model.rateMovie.RateMovieBO;
 import c2.elastic.bucket.EvidenceService.model.rateMovie.RateMovieDO;
 import c2.elastic.bucket.EvidenceService.model.rateMovie.RateMovieDTO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static c2.elastic.bucket.EvidenceService.constants.EventConstants.ADD_TO_BUCKET_EVENT;
 import static c2.elastic.bucket.EvidenceService.constants.EventConstants.DETAILS_EVENT;
 import static c2.elastic.bucket.EvidenceService.constants.EventConstants.GENRE_VIEW_EVENT;
@@ -40,6 +43,10 @@ public class EventBOFactory {
                 break;
         }
         return eventBO;
+    }
+
+    public static List<EventBO<?, ?>> createBO(List<EventDTO> eventDTOList) {
+        return eventDTOList.stream().map(EventBOFactory::createBO).collect(Collectors.toList());
     }
 
     public static EventBO<?, ?> createBO(EventDO eventDO) {

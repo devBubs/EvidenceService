@@ -19,7 +19,7 @@ public class RateMovieBO extends EventBO<RateMovieDTO, RateMovieDO> {
     private long contentId;
     private float rating;
 
-    public RateMovieBO(long userId, String timestamp, String eventType, long contentId, float rating) {
+    public RateMovieBO(String userId, String timestamp, String eventType, long contentId, float rating) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
         this.rating = rating;

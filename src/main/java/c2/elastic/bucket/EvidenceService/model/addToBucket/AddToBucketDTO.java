@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 public class AddToBucketDTO extends EventDTO {
     private long contentId;
 
-    public AddToBucketDTO(long userId, String timestamp, String eventType, long contentId) {
+    public AddToBucketDTO(String userId, String timestamp, String eventType, long contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
     }

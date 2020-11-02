@@ -19,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 public class AddToBucketDO extends EventDO {
     private long contentId;
 
-    public AddToBucketDO(long userId, String timestamp, String eventType, long contentId) {
+    public AddToBucketDO(String userId, String timestamp, String eventType, long contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
     }

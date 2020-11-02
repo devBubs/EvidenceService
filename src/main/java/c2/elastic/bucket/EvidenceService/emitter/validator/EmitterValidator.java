@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -43,6 +44,27 @@ public class EmitterValidator {
         }catch(IllegalArgumentException e){
             throw new EvidenceServiceInvalidInputException(e.getMessage(), e);
         }
+    }
+
+    public void validateEmitEvent(List<EventDTO> eventDTOList){
+        try{
+            eventDTOList.forEach(event->{
+                Preconditions.checkArgument(StringUtils.isNotBlank(event.getTimestamp()), EmitterConstants.EVENT_TYPE_NULL);
+                Preconditions.checkArgument(StringUtils.isNotBlank(event.getEventType()), EmitterConstants.EVENT_TYPE_INVALID);
+            });
+            String incomingEventType = eventDTOList.get(0).getEventType();
+            Preconditions.checkArgument(validEvents.contains(incomingEventType), EmitterConstants.EVENT_TYPE_INVALID);
+            Preconditions.checkArgument(eventDTOList.stream().allMatch(event-> event.getEventType().equals(incomingEventType)), EmitterConstants.EVENT_TYPE_NOT_HOMOGENOUS);
+            switch (incomingEventType){
+                case ADD_TO_BUCKET_EVENT: eventDTOList.forEach(event->validateAddToBucketEvent((AddToBucketDTO)event)); break;
+                case DETAILS_EVENT: eventDTOList.forEach(event->validateDetailsEvent((DetailsDTO)event)); break;
+                case GENRE_VIEW_EVENT: eventDTOList.forEach(event->validateGenreViewEvent((GenreViewDTO) event)); break;
+                case RATE_MOVIE_EVENT: eventDTOList.forEach(event->validateRateMovieEvent((RateMovieDTO) event)); break;
+            }
+        }catch (IllegalArgumentException e){
+            throw new EvidenceServiceInvalidInputException(e.getMessage(), e);
+        }
+
     }
 
     private void validateAddToBucketEvent(AddToBucketDTO addToBucketDTO){

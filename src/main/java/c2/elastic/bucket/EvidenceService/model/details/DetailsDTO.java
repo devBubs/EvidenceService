@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 public class DetailsDTO extends EventDTO {
     private long contentId;
 
-    public DetailsDTO(long userId, String timestamp, String eventType, long contentId) {
+    public DetailsDTO(String userId, String timestamp, String eventType, long contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
     }

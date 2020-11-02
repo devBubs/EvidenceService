@@ -18,7 +18,7 @@ public class DetailsBO extends EventBO<DetailsDTO, DetailsDO> {
 
     private long contentId;
 
-    public DetailsBO(long userId, String timestamp, String eventType, long contentId) {
+    public DetailsBO(String userId, String timestamp, String eventType, long contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
     }

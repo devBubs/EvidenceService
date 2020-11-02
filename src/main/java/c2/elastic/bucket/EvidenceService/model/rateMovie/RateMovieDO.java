@@ -18,7 +18,7 @@ public class RateMovieDO extends EventDO {
     private long contentId;
     private float rating;
 
-    public RateMovieDO(long userId, String timestamp, String eventType, long contentId, float rating) {
+    public RateMovieDO(String userId, String timestamp, String eventType, long contentId, float rating) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
         this.rating = rating;
