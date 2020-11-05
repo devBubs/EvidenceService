@@ -1,11 +1,11 @@
-package c2.elastic.bucket.EvidenceService.emitter.validator;
+package c2.elastic.bucket.EvidenceService.components.emitter.validator;
 
 import static c2.elastic.bucket.EvidenceService.constants.EventConstants.ADD_TO_BUCKET_EVENT;
 import static c2.elastic.bucket.EvidenceService.constants.EventConstants.DETAILS_EVENT;
 import static c2.elastic.bucket.EvidenceService.constants.EventConstants.GENRE_VIEW_EVENT;
 import static c2.elastic.bucket.EvidenceService.constants.EventConstants.RATE_MOVIE_EVENT;
 
-import c2.elastic.bucket.EvidenceService.emitter.constants.EmitterConstants;
+import c2.elastic.bucket.EvidenceService.components.emitter.constants.EmitterConstants;
 import c2.elastic.bucket.EvidenceService.exception.EvidenceServiceInvalidInputException;
 
 import c2.elastic.bucket.EvidenceService.model.addToBucket.AddToBucketDTO;
@@ -68,18 +68,18 @@ public class EmitterValidator {
     }
 
     private void validateAddToBucketEvent(AddToBucketDTO addToBucketDTO){
-
+        //Todo: add appropriate validation
     }
 
     private void validateDetailsEvent(DetailsDTO detailsDTO){
-
+        //Todo: add appropriate validation
     }
 
     private void validateGenreViewEvent(GenreViewDTO genreViewDTO){
-
+        //Todo: add appropriate validation
     }
 
     private void validateRateMovieEvent(RateMovieDTO rateMovieDTO){
-
+        //Todo: add appropriate validation
     }
 }

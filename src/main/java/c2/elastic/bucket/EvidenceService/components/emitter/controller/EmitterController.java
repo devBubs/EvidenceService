@@ -1,8 +1,8 @@
-package c2.elastic.bucket.EvidenceService.emitter.controller;
+package c2.elastic.bucket.EvidenceService.components.emitter.controller;
 
-import c2.elastic.bucket.EvidenceService.emitter.manager.EmitterManager;
-import c2.elastic.bucket.EvidenceService.emitter.util.ErrorUtil;
-import c2.elastic.bucket.EvidenceService.emitter.validator.EmitterValidator;
+import c2.elastic.bucket.EvidenceService.components.emitter.manager.EmitterManager;
+import c2.elastic.bucket.EvidenceService.components.emitter.util.ErrorUtil;
+import c2.elastic.bucket.EvidenceService.components.emitter.validator.EmitterValidator;
 import c2.elastic.bucket.EvidenceService.exception.EvidenceServiceInvalidInputException;
 import c2.elastic.bucket.EvidenceService.model.baseEvent.EventDTO;
 import c2.elastic.bucket.GenBucket.model.GenericResponse;

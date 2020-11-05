@@ -1,4 +1,4 @@
-package c2.elastic.bucket.EvidenceService.config;
+package c2.elastic.bucket.EvidenceService.components.emitter.config;
 
 import c2.elastic.bucket.EvidenceService.constants.EventConstants;
 import c2.elastic.bucket.EvidenceService.model.addToBucket.AddToBucketDTO;
@@ -23,34 +23,30 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Map;
 
 @Configuration
-public class EvidenceServiceConfiguration {
+public class EvidenceServiceEmitterConfiguration {
 
-    @Bean(name="AddToBucketProducerConfig")
-    CustomProducerConfig getAddToBucketProducerConfig(){
+    @Bean(name = "AddToBucketProducerConfig")
+    CustomProducerConfig getAddToBucketProducerConfig() {
         return CustomProducerConfig.builder()
                 .bootstrapServers("localhost:9092")
                 .numWorkers(2)
-                .keySerializer("org.apache.kafka.common.serialization.StringSerializer")
-                .valueSerializer("c2.elastic.bucket.EvidenceService.emitter.producer.serializer.EventBOSerializer")
                 .topic(EventConstants.ADD_TO_BUCKET_EVENT_TOPIC)
                 .producerPoolMaxWait(20000)
                 .build();
     }
 
-    @Bean(name="DetailsProducerConfig")
-    CustomProducerConfig getDetailsProducerConfig(){
+    @Bean(name = "DetailsProducerConfig")
+    CustomProducerConfig getDetailsProducerConfig() {
         return CustomProducerConfig.builder()
                 .bootstrapServers("localhost:9092")
                 .numWorkers(2)
-                .keySerializer("org.apache.kafka.common.serialization.StringSerializer")
-                .valueSerializer("c2.elastic.bucket.EvidenceService.emitter.producer.serializer.EventBOSerializer")
                 .topic(EventConstants.DETAILS_EVENT_TOPIC)
                 .producerPoolMaxWait(20000)
                 .build();
     }
 
-    @Bean(name="GenreViewProducerConfig")
-    CustomProducerConfig getGenreViewProducerConfig(){
+    @Bean(name = "GenreViewProducerConfig")
+    CustomProducerConfig getGenreViewProducerConfig() {
         return CustomProducerConfig.builder()
                 .bootstrapServers("localhost:9092")
                 .numWorkers(2)
@@ -59,8 +55,8 @@ public class EvidenceServiceConfiguration {
                 .build();
     }
 
-    @Bean(name="RateMovieProducerConfig")
-    CustomProducerConfig getRateMovieProducerConfig(){
+    @Bean(name = "RateMovieProducerConfig")
+    CustomProducerConfig getRateMovieProducerConfig() {
         return CustomProducerConfig.builder()
                 .bootstrapServers("localhost:9092")
                 .numWorkers(2)
@@ -69,12 +65,12 @@ public class EvidenceServiceConfiguration {
                 .build();
     }
 
-    @Bean(name="AllProducersMap")
-    Map<String,? extends Producer<String, ? extends EventDTO>> getAllProducerMap(
+    @Bean(name = "AllProducersMap")
+    Map<String, ? extends Producer<String, ? extends EventDTO>> getAllProducerMap(
             @Qualifier("AddToBucketEventProducer") KProducer<String, AddToBucketDTO> addToBucketEventProducer,
             @Qualifier("DetailsEventProducer") KProducer<String, DetailsDTO> detailsEventProducer,
             @Qualifier("GenreViewEventProducer") KProducer<String, GenreViewDTO> genreViewEventProducer,
-            @Qualifier("RateMovieEventProducer") KProducer<String, RateMovieDTO> rateMovieEventProducer){
+            @Qualifier("RateMovieEventProducer") KProducer<String, RateMovieDTO> rateMovieEventProducer) {
         Map<String, KProducer<String, ? extends EventDTO>> producerMap = Maps.newHashMap();
         producerMap.put(EventConstants.ADD_TO_BUCKET_EVENT, addToBucketEventProducer);
         producerMap.put(EventConstants.DETAILS_EVENT, detailsEventProducer);
@@ -85,19 +81,19 @@ public class EvidenceServiceConfiguration {
     }
 
     @Bean
-    ObjectMapper getObjectMapper(){
+    ObjectMapper getObjectMapper() {
         return new ObjectMapper();
     }
 
     @Bean
     @Qualifier("KafkaStringSerializer")
-    Serializer<String> getStringSerializer(){
+    Serializer<String> getStringSerializer() {
         return new StringSerializer();
     }
 
     @Bean
     @Qualifier("AddToBucketEventSerializer")
-    Serializer<AddToBucketDTO> getAddToBucketEventSerializer(ObjectMapper objectMapper){
+    Serializer<AddToBucketDTO> getAddToBucketEventSerializer(ObjectMapper objectMapper) {
         return new Serializer<AddToBucketDTO>() {
 
             @Autowired
@@ -119,8 +115,8 @@ public class EvidenceServiceConfiguration {
     @Bean
     @Qualifier("AddToBucketEventProducer")
     KProducer<String, AddToBucketDTO> getAddToBucketEventProducer(@Qualifier("AddToBucketProducerConfig") CustomProducerConfig configuration,
-                                                  @Qualifier("AddToBucketEventSerializer") Serializer<AddToBucketDTO> valueSerializer,
-                                                  @Qualifier("KafkaStringSerializer") Serializer<String>  keySerializer) {
+                                                                  @Qualifier("AddToBucketEventSerializer") Serializer<AddToBucketDTO> valueSerializer,
+                                                                  @Qualifier("KafkaStringSerializer") Serializer<String> keySerializer) {
         return new KProducer<String, AddToBucketDTO>(configuration, keySerializer, valueSerializer) {
             @Override
             protected Message<String, AddToBucketDTO> convert(AddToBucketDTO addToBucketDTO) {
@@ -133,7 +129,7 @@ public class EvidenceServiceConfiguration {
 
     @Bean
     @Qualifier("DetailsEventSerializer")
-    Serializer<DetailsDTO> getDetailsEventSerializer(ObjectMapper objectMapper){
+    Serializer<DetailsDTO> getDetailsEventSerializer(ObjectMapper objectMapper) {
         return new Serializer<DetailsDTO>() {
 
             @Autowired
@@ -155,8 +151,8 @@ public class EvidenceServiceConfiguration {
     @Bean
     @Qualifier("DetailsEventProducer")
     KProducer<String, DetailsDTO> getDetailsEventProducer(@Qualifier("DetailsProducerConfig") CustomProducerConfig configuration,
-                                              @Qualifier("DetailsEventSerializer") Serializer<DetailsDTO> valueSerializer,
-                                              @Qualifier("KafkaStringSerializer") Serializer<String>  keySerializer) {
+                                                          @Qualifier("DetailsEventSerializer") Serializer<DetailsDTO> valueSerializer,
+                                                          @Qualifier("KafkaStringSerializer") Serializer<String> keySerializer) {
         return new KProducer<String, DetailsDTO>(configuration, keySerializer, valueSerializer) {
             @Override
             protected Message<String, DetailsDTO> convert(DetailsDTO detailsDTO) {
@@ -170,7 +166,7 @@ public class EvidenceServiceConfiguration {
 
     @Bean
     @Qualifier("GenreViewEventSerializer")
-    Serializer<GenreViewDTO> getGenreViewEventSerializer(ObjectMapper objectMapper){
+    Serializer<GenreViewDTO> getGenreViewEventSerializer(ObjectMapper objectMapper) {
         return new Serializer<GenreViewDTO>() {
 
             @Autowired
@@ -192,8 +188,8 @@ public class EvidenceServiceConfiguration {
     @Bean
     @Qualifier("GenreViewEventProducer")
     KProducer<String, GenreViewDTO> getGenreViewEventProducer(@Qualifier("GenreViewProducerConfig") CustomProducerConfig configuration,
-                                              @Qualifier("GenreViewEventSerializer") Serializer<GenreViewDTO> valueSerializer,
-                                              @Qualifier("KafkaStringSerializer") Serializer<String>  keySerializer) {
+                                                              @Qualifier("GenreViewEventSerializer") Serializer<GenreViewDTO> valueSerializer,
+                                                              @Qualifier("KafkaStringSerializer") Serializer<String> keySerializer) {
         return new KProducer<String, GenreViewDTO>(configuration, keySerializer, valueSerializer) {
             @Override
             protected Message<String, GenreViewDTO> convert(GenreViewDTO genreViewDTO) {
@@ -207,7 +203,7 @@ public class EvidenceServiceConfiguration {
 
     @Bean
     @Qualifier("RateMovieEventSerializer")
-    Serializer<RateMovieDTO> getRateMovieEventSerializer(ObjectMapper objectMapper){
+    Serializer<RateMovieDTO> getRateMovieEventSerializer(ObjectMapper objectMapper) {
         return new Serializer<RateMovieDTO>() {
 
             @Autowired
@@ -229,8 +225,8 @@ public class EvidenceServiceConfiguration {
     @Bean
     @Qualifier("RateMovieEventProducer")
     KProducer<String, RateMovieDTO> getRateMovieEventProducer(@Qualifier("RateMovieProducerConfig") CustomProducerConfig configuration,
-                                                @Qualifier("RateMovieEventSerializer") Serializer<RateMovieDTO> valueSerializer,
-                                                @Qualifier("KafkaStringSerializer") Serializer<String>  keySerializer) {
+                                                              @Qualifier("RateMovieEventSerializer") Serializer<RateMovieDTO> valueSerializer,
+                                                              @Qualifier("KafkaStringSerializer") Serializer<String> keySerializer) {
         return new KProducer<String, RateMovieDTO>(configuration, keySerializer, valueSerializer) {
             @Override
             protected Message<String, RateMovieDTO> convert(RateMovieDTO rateMovieDTO) {

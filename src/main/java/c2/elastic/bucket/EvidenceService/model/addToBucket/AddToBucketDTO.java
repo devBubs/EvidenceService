@@ -16,9 +16,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddToBucketDTO extends EventDTO {
-    private long contentId;
+    private String contentId;
 
-    public AddToBucketDTO(String userId, String timestamp, String eventType, long contentId) {
+    public AddToBucketDTO(String userId, String timestamp, String eventType, String contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
     }

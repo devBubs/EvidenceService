@@ -1,4 +1,4 @@
-package c2.elastic.bucket.EvidenceService.emitter.manager;
+package c2.elastic.bucket.EvidenceService.components.emitter.manager;
 
 import c2.elastic.bucket.EvidenceService.exception.EvidenceServiceNonRetriableException;
 import c2.elastic.bucket.EvidenceService.model.baseEvent.EventDTO;

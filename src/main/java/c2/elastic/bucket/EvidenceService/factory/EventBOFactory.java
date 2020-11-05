@@ -45,7 +45,7 @@ public class EventBOFactory {
         return eventBO;
     }
 
-    public static List<EventBO<?, ?>> createBO(List<EventDTO> eventDTOList) {
+    public static List<? extends EventBO<?, ?>> createBO(List<? extends EventDTO> eventDTOList) {
         return eventDTOList.stream().map(EventBOFactory::createBO).collect(Collectors.toList());
     }
 

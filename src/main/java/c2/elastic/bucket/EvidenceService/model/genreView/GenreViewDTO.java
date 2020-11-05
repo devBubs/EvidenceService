@@ -15,9 +15,9 @@ import lombok.experimental.SuperBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
 public class GenreViewDTO extends EventDTO {
-    private long contentId;
+    private String contentId;
 
-    public GenreViewDTO(String userId, String timestamp, String eventType, long contentId) {
+    public GenreViewDTO(String userId, String timestamp, String eventType, String contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
     }

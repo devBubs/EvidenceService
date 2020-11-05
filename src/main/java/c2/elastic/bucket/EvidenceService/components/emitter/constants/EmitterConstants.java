@@ -1,4 +1,4 @@
-package c2.elastic.bucket.EvidenceService.emitter.constants;
+package c2.elastic.bucket.EvidenceService.components.emitter.constants;
 
 public class EmitterConstants {
     public static final String EVENT_TIMESTAMP_NULL = "timestamp cannot be null";
