@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @ToString(callSuper = true)
 @NoArgsConstructor
 public abstract class EventBO<DTO extends EventDTO, DO extends EventDO> extends Event {
-    public EventBO(long userId, String timestamp, String eventType) {
+    public EventBO(String userId, String timestamp, String eventType) {
         super(userId, timestamp, eventType);
     }
     public abstract DO convertToDO();

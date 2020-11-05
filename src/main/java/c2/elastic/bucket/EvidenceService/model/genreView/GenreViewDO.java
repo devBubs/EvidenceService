@@ -15,9 +15,9 @@ import lombok.experimental.SuperBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
 public class GenreViewDO extends EventDO {
-    private long contentId;
+    private String contentId;
 
-    public GenreViewDO(long userId, String timestamp, String eventType, long contentId) {
+    public GenreViewDO(String userId, String timestamp, String eventType, String contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
     }

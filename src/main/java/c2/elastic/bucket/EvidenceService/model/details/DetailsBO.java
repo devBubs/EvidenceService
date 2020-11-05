@@ -16,9 +16,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class DetailsBO extends EventBO<DetailsDTO, DetailsDO> {
 
-    private long contentId;
+    private String contentId;
 
-    public DetailsBO(long userId, String timestamp, String eventType, long contentId) {
+    public DetailsBO(String userId, String timestamp, String eventType, String contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
     }

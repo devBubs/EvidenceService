@@ -1,4 +1,4 @@
-package c2.elastic.bucket.EvidenceService.emitter.util;
+package c2.elastic.bucket.EvidenceService.components.emitter.util;
 
 import c2.elastic.bucket.GenBucket.model.GenericError;
 import c2.elastic.bucket.GenBucket.model.GenericResponse;

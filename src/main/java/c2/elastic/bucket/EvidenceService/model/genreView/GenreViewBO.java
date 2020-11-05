@@ -16,9 +16,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class GenreViewBO extends EventBO<GenreViewDTO, GenreViewDO>{
 
-    private long contentId;
+    private String contentId;
 
-    public GenreViewBO(long userId, String timestamp, String eventType, long contentId) {
+    public GenreViewBO(String userId, String timestamp, String eventType, String contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
     }

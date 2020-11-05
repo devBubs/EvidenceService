@@ -15,9 +15,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 public class DetailsDO extends EventDO {
-    private long contentId;
+    private String contentId;
 
-    public DetailsDO(long userId, String timestamp, String eventType, long contentId) {
+    public DetailsDO(String userId, String timestamp, String eventType, String contentId) {
         super(userId, timestamp, eventType);
         this.contentId = contentId;
     }

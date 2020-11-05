@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>com.github.devBubs</groupId>
 			<artifactId>GenBucket</artifactId>
-			<version>2d3b1f0</version>
+			<version>bb993ef</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>

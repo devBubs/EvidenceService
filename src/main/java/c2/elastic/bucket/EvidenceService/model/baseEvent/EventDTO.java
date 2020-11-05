@@ -35,7 +35,7 @@ import static c2.elastic.bucket.EvidenceService.constants.EventConstants.RATE_MO
         @JsonSubTypes.Type(value = RateMovieDTO.class, name = RATE_MOVIE_EVENT)
 })
 public abstract class EventDTO extends Event {
-    public EventDTO(long userId, String timestamp, String eventType) {
+    public EventDTO(String userId, String timestamp, String eventType) {
         super(userId, timestamp, eventType);
     }
 }
